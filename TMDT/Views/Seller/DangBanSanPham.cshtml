@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "Đăng bán sản phẩm";
+    Layout = "~/Views/Shared/_Dashboard_1.cshtml";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Assets/_Apartment/dist/css/hide-arrow-number.css">
+    <link rel="stylesheet" href="~/Assets/_Apartment/plugins/summernote/summernote-bs4.css">
+}
+@section scripts {
+    <!-- jquery ASP.NET -->
+    <script src="~/scripts/jquery.validate.min.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Assets/_Apartment/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            bsCustomFileInput.init();
+        });</script>
+    <script src="~/Assets/_Apartment/plugins/summernote/summernote-bs4.js"></script>
+    <!-- Page Script -->
+    <script>
+        $(function () {
+            //Add text editor
+            $('#compose-textarea').summernote({
+                height: 200,
+                width: '100%',
+            })
+        })
+    </script>
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Đăng bán sản phẩm</h1>
+                </div>
+                <!-- /.col -->
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body register-card-body">
+                    <p class="login-box-msg">
+                        <b>ĐĂNG BÁN SẢN PHẨM</b>
+                    </p>
+                    @using (Html.BeginForm("DangBanSanPham", "Seller", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <p><span style="color:red">@ViewData["Err"]</span></p>
+                        @*<p><span style="color:Highlight"><b>@ViewData["Reg1"]</b></span></p>
+                            <p><span style="color:Highlight"><b>@ViewData["Reg2"]</b></span></p>
+                            <p><span style="color:Highlight"><b>@ViewData["Reg3"]</b></span></p>*@
+                        <div class="form-group">
+                            <label for="avartar">Ảnh sản phẩm</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="imageProduct_1" accept="image/*" name="imageProduct_1">
+                                <label class="custom-file-label text-muted" for="avartar">Ảnh 1</label>
+                            </div>
+                            <p></p>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="imageProduct_2" accept="image/*" name="imageProduct_2">
+                                <label class="custom-file-label text-muted" for="avartar">Ảnh 2</label>
+                            </div>
+                            <p></p>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="imageProduct_3" accept="image/*" name="imageProduct_3">
+                                <label class="custom-file-label text-muted" for="avartar">Ảnh 3</label>
+                            </div>
+                            <p></p>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="imageProduct_4" accept="image/*" name="imageProduct_4">
+                                <label class="custom-file-label text-muted" for="avartar">Ảnh 4</label>
+                            </div>
+                        </div>
+                        <label>Tên sản phẩm</label>
+                        <div class="input-group mb-3">
+                            @Html.TextBox("nameProduct", null, new { @class = "form-control", type = "text", placeholder = "Tên sản phẩm" })
+                            <div class="input-group-append">
+                                <div class="input-group-text"></div>
+                            </div>
+                        </div>
+
+                        <label>Mô tả sản phẩm</label>
+                        <div class="input-group mb-3">
+                            @Html.TextArea("descriptionProduct", null, new { @class = "form-control", id = "compose-textarea" })
+                        </div>
+
+                        <label>Loại sản phẩm</label>
+                        <div class="input-group mb-3">
+                            @Html.DropDownList("idCategory_Product", ViewBag.CategorySanPham as SelectList, new { @class = "form-control" })
+                        </div>
+
+                        <label>Giá sản phẩm</label>
+                        <div class="input-group mb-3">
+                            @Html.TextBox("priceProduct", null, new { @class = "form-control", type = "number", name = "Giá sản phẩm" })
+                            <div class="input-group-append">
+                                <div class="input-group-text"></div>
+                            </div>
+                        </div>
+
+                        <label>Số lượng</label>
+                        <div class="input-group mb-3">
+                            @Html.TextBox("amountProduct", null, new { @class = "form-control", type = "number", name = "Số lượng sản phẩm" })
+                            <div class="input-group-append">
+                                <div class="input-group-text"></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- /.col -->
+                            <div class="col-md-auto">
+                                <button type="submit" class="btn btn-primary btn-block">Thêm</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <aside class="control-sidebar control-sidebar-dark"></aside>
+    </section>
+</div>
+

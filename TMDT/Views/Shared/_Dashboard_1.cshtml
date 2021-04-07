@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="~/Assets/_Apartment/dist/img/favicon.jpg" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Assets/_Apartment/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Assets/_Apartment/dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/Assets/_Apartment/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="~/Assets/_Apartment/dist/css/fonts/fonts.css" rel="stylesheet">
+    @RenderSection("styles", false)
+    <!-- jQuery -->
+    <script src="~/Assets/_Apartment/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Assets/_Apartment/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="~/Assets/_Apartment/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Assets/_Apartment/dist/js/adminlte.js"></script>
+    @RenderSection("scripts", required: false)
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand navbar-dark">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item"> <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a> </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4 text-nowrap">
+            <!-- Brand Logo -->
+            @*@{ Html.RenderAction("getLogoName", "home"); }*@
+            <a href="@Url.Action("TrangChu", "Home")" class="brand-link" style="text-align: center;"><b style="font-weight: bold; font-size: 25px; color: #e8c713;"><i class="nav-icon fas fa-shopping-cart"></i> ChoDoCu</b></a>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                @{ Html.RenderAction("loadInfo", "Home"); }
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                           with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a href="@Url.Action("ThongTinCaNhan", "Home")" class="nav-link">
+                                <i class="nav-icon fas fa-info-circle"></i>
+                                <p>Thông tin cá nhân</p>
+                            </a>
+                        </li>
+                        @if (Equals(Session["idRole"], 1))
+                        {                       
+                        <li class="nav-header"><b class="text-white">Người bán</b> </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("DangBanSanPham", "Seller")" class="nav-link">
+                                <i class="nav-icon fas fa-plus-square"></i>
+                                <p>Đăng bán sản phẩm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("DanhSachSanPham", "Seller")" class="nav-link">
+                                <i class="nav-icon fas fa-list-ul"></i>
+                                <p>Danh sách sản phẩm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("DanhSachDatMua", "Seller")" class="nav-link">
+                                <i class="nav-icon fas fa-list-ol"></i>
+                                <p>Danh sách đơn hàng</p>
+                            </a>
+                        </li>
+                        }
+                        @if (Equals(Session["idRole"], 2))
+                        {
+
+                        <li class="nav-header"><b class="text-white">Người mua</b> </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("DanhSachMuaHang", "Buyer")" class="nav-link">
+                                <i class="nav-icon fas fa-history"></i>
+                                <p>Danh sách mua hàng</p>
+                            </a>
+                        </li>                        
+                        @*<li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fab fa-product-hunt"></i>
+                                <p>Tình trạng đơn hàng</p>
+                            </a>
+                        </li>*@
+                        <li class="nav-item">
+                            <a href="@Url.Action("Giohang", "Buyer")" class="nav-link">
+                                <i class="nav-icon fas fa-shopping-cart"></i>
+                                <p>Giỏ hàng</p>
+                            </a>
+                        </li>
+                        }
+                        @if (Equals(Session["idRole"], 3))
+                        {
+                        <li class="nav-header"><b class="text-white">Vận chuyển</b> </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("DonVanChuyen", "Shipper")" class="nav-link">
+                                <i class="nav-icon fa fa-truck"></i>
+                                <p>Đơn vận chuyển</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("DonVanChuyenDaNhan", "Shipper")" class="nav-link">
+                                <i class="nav-icon fas fa-check-double"></i>
+                                <p>Đơn vận chuyển đã nhận</p>
+                            </a>
+                        </li>
+                        }
+                        @if (Equals(Session["idRole"], 4) || Equals(Session["idRole"], 5))
+                        {
+                        <li class="nav-header"><b class="text-white">Nhân viên</b> </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("QuanLyTaiKhoanKH", "Manager")" class="nav-link">
+                                <i class="nav-icon fa fa-users"></i>
+                                <p>Quản lý khách hàng</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("SanPhamDangDoiDuyet", "Manager")" class="nav-link">
+                                <i class="nav-icon fas fa-vote-yea"></i>
+                                <p>Sản phẩm đang đợi duyệt</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("SanPhamDaDuyet", "Manager")" class="nav-link">
+                                <i class="nav-icon fas fa-clipboard-check"></i>
+                                <p>Sản phẩm đã duyệt</p>
+                            </a>
+                        </li>
+                        }
+                        @if (Equals(Session["idRole"], 5))
+                        {
+                        <li class="nav-header"><b class="text-white">Admin</b> </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("ThemNhanVien", "RegisterAccount")" class="nav-link">
+                                <i class="nav-icon fa fa-user"></i>
+                                <p>Thêm nhân viên</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("QuanLyNhanVien", "Manager")" class="nav-link">
+                                <i class="nav-icon fas fa-user-shield"></i>
+                                <p>Quản lý nhân viên</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("DanhMucSanPham", "Manager")" class="nav-link">
+                                <i class="nav-icon fas fa-folder"></i>
+                                <p>Danh mục sản phẩm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("ThemDanhMuc", "Manager")" class="nav-link">
+                                <i class="nav-icon fas fa-folder-plus"></i>
+                                <p>Thêm danh mục sản phẩm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("DanhSachTaiKhoanVoHieuHoa", "Manager")" class="nav-link">
+                                <i class="nav-icon fas fa-ban"></i>
+                                <p>Tài khoản vô hiệu hóa</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("DanhSachAn", "Manager")" class="nav-link">
+                                <i class="nav-icon fas fa-eye-slash"></i>
+                                <p>Danh sách sản phẩm ẩn</p>
+                            </a>
+                        </li>
+                        }
+                        <!--Bug không hiện trên mobile, để dòng dưới mới hiện dư thêm 1 dòng-->
+                        <li class="nav-item"><i class="nav-icon"></i></li>
+                        <li class="nav-item"><i class="nav-icon"></i></li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+        @RenderBody()
+    </div>
+    <script src="~/Assets/adsRemove.js"></script>
+</body>
+</html>
