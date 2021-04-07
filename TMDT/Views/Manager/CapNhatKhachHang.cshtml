@@ -1,0 +1,136 @@
+﻿@model IEnumerable<TMDT.Models._FullAccountInfo>
+
+@{
+    ViewBag.Title = "Cập Nhật Khách Hàng";
+    Layout = "~/Views/Shared/_Dashboard_1.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Cập nhật khách hàng</h1>
+                </div>
+                <!-- /.col -->
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="card">
+                <div class="card-body register-card-body">
+                    <p class="login-box-msg">
+                        <b>CẬP NHẬT KHÁCH HÀNG</b>
+                    </p>
+                    @using (Html.BeginForm("CapNhatKhachHang", "Manager", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <p><span style="color:Highlight">@ViewData["Err3"]</span></p>
+                            <p><span style="color:red">@ViewData["Err1"]</span></p>
+                            <p><span style="color:red">@ViewData["ErrMess1"]</span></p>
+                            <p><span style="color:red">@ViewData["ErrMess2"]</span></p>
+                            <p><span style="color:red">@ViewData["ErrMess3"]</span></p>
+                            <p><span style="color:red">@ViewData["ErrMess4"]</span></p>
+                            <p><span style="color:red">@ViewData["ErrMess5"]</span></p>
+                        foreach (var tt in Model)
+                        {
+                            <label>Họ tên</label>
+                                <div class="input-group mb-3">
+                                    @Html.TextBox("Username", null, new { @class = "form-control", type = "text", placeholder = "Họ và tên", Value = tt.Fullname })
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-user"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    @Html.TextBox("Birthday", null, new { @class = "form-control", type = "date", name = "Birthday", Value = Convert.ToDateTime(tt.Birthday).ToString("yyyy-MM-dd") })
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-birthday-cake"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            /* <label>Giới tính:</label><text>&nbsp;&nbsp;&nbsp;&nbsp;</text>
+                             if (tt.Sex.ToString() == "Nam")
+                             {
+                                 <label class="radio-inline">
+                                     @Html.RadioButton("Sex", "Nam", new { Checked = "checked" }) Nam
+                                 </label><text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
+                                 <label class="radio-inline">
+                                     @Html.RadioButton("Sex", "Nữ") Nữ
+                                 </label><p></p>
+                             }
+                             else
+                             {
+                                 <label class="radio-inline">
+                                     @Html.RadioButton("Sex", "Nam") Nam
+                                 </label><text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
+                                 <label class="radio-inline">
+                                     @Html.RadioButton("Sex", "Nữ", new { Checked = "checked" }) Nữ
+                                 </label><p></p>
+                             }*/
+                            <div class="input-group mb-3">
+                                @Html.TextBox("PhoneNumber", null, new { @class = "form-control", type = "number", placeholder = "Số điện thoại", Value = tt.PhoneNumber })
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fas fa-phone"></span>
+                                    </div>
+                                </div>
+                            </div>
+                                <label>Địa chỉ</label>
+                                <div class="input-group mb-3">
+                                    @Html.TextBox("Address", null, new { @class = "form-control", type = "text", placeholder = "Địa chỉ", Value = tt.Address })
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-id-card"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label>Địa chỉ Email</label>
+                                <div class="input-group mb-3">
+                                    @Html.TextBox("Email", null, new { @class = "form-control", type = "email", placeholder = "Địa chỉ Email", Value = tt.Email })
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-envelope"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                               /* <label>Chức vụ</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" value="@Html.DisplayFor(a => tt.ChucVu)" disabled>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-briefcase"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    @Html.DropDownList("idStaff", ViewBag.Loadchucvu as SelectList, "Chọn chức vụ (nếu cần thay đổi)", new { @class = "form-control" })
+                                    <div class="input-group-text">
+                                        <span class="fas fa-briefcase"></span>
+                                    </div>
+                                </div>*/
+                        }
+                        <div class="row">
+                            <!-- /.col -->
+                            <div class="col-md-auto">
+                                <button type="submit" class="btn btn-primary btn-block" name="updateAccount" value="updateAccount" onclick="return confirm('Bạn có chắc muốn cập nhật tài khoản này ?')">Cập nhật</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- /.card -->
+    </section>
+</div>

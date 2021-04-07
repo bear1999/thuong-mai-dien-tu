@@ -1,0 +1,80 @@
+﻿@model IEnumerable<TMDT.Models.Category_Product>
+@{
+    ViewBag.Title = "Danh mục sản phẩm";
+    Layout = "~/Views/Shared/_Dashboard_1.cshtml";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Assets/_Apartment/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+}
+@section scripts {
+    <script src="~/Assets/_Apartment/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Assets/_Apartment/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <script>
+        $(function () {
+            $("#example1").DataTable({ "lengthMenu": [[10, 25, 50, 150, 200], [10, 25, 50, 150, 200]] }); //Cái [] ngoài cùng hiện tên vd:"Tất cả" thì = -1
+        });
+    </script>
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Danh mục sản phẩm</h1>
+                </div>
+                <!-- /.col -->
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"><span style="color:red"><b>Danh sách danh mục</b></span></h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-2">
+                        <table id="example1" class="table table-bordered table-striped text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Mã danh mục</th>
+                                    <th>Tên danh mục</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Icon</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var kh in Model)
+                                {
+                                    <tr>
+                                        <td><a href="@Url.Action("CapNhatDanhMuc", "Manager", new { id = kh.idCategory_Product })"><i class="nav-icon fas fa-edit"></i></a></td>
+                                        <td>@Html.DisplayFor(a => kh.idCategory_Product)</td>
+                                        <td>@Html.DisplayFor(a => kh.nameCategory)</td>
+                                        <td>@Html.DisplayFor(a => kh.imageCategory)</td>
+                                        <td>@Html.Raw(kh.iconCategory)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- End Main content -->
+</div>
+
