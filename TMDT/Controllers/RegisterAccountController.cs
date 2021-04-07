@@ -98,6 +98,67 @@ namespace TMDT.Controllers
             return View();
         }
         // GET: RegisterAccount
-        
+        [HttpGet]
+        public ActionResult DangKyKhachHang()
+        {
+            return View();
+        }
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult DangKyKhachHang(FormCollection collect, Login login, infoAccount infoAcc)
+        {
+            var Email = collect["Email"];
+            var Hoten = collect["Hoten"];
+            var Birthday = String.Format("{0:MM/dd/yyy}", collect["Birthday"]);
+            var PhoneNumber = collect["PhoneNumber"];
+            var Address = collect["Address"];
+            var idRole = collect["idRole"];
+            var MatKhau = collect["Password"];
+
+            if (String.IsNullOrEmpty(Email))
+                ViewData["Err"] = "(*) Vui lòng nhập Địa chỉ email";
+            else if (String.IsNullOrEmpty(Hoten))
+                ViewData["Err"] = "(*) Vui lòng nhập Họ tên";
+            else if (String.IsNullOrEmpty(Birthday))
+                ViewData["Err"] = "(*) Vui lòng nhập Ngày sinh";
+            else if (String.IsNullOrEmpty(PhoneNumber))
+                ViewData["Err"] = "(*) Vui lòng nhập Số điện thoại";
+            else if (String.IsNullOrEmpty(Address))
+                ViewData["Err"] = "(*) Vui lòng nhập Địa chỉ";
+            else if (String.IsNullOrEmpty(MatKhau))
+                ViewData["Err"] = "(*) Vui lòng nhập Mật khẩu";
+            else if (String.IsNullOrEmpty(idRole))
+                ViewData["Err"] = "(*) Vui lòng chọn Người bán hoặc Người mua";
+            else
+            {
+                login.Email = Email;
+                login.Password = _Function.md5(MatKhau);
+                db.Logins.Add(login);
+
+                infoAcc.Fullname = Hoten;
+                infoAcc.Birthday = DateTime.Parse(Birthday);
+                infoAcc.PhoneNumber = PhoneNumber;
+                infoAcc.Address = Address;
+                infoAcc.idRole = int.Parse(idRole);
+                infoAcc.idAccount = login.idAccount;
+                db.infoAccounts.Add(infoAcc);
+
+                db.SaveChanges();
+
+                ViewData["Err"] = "(*) ĐĂNG KÝ THÀNH CÔNG";
+                return View();
+            }
+            return View();
+        }
+        [NonAction]
+        public void DropDownListChucVu()
+        {
+            var dataList = new SelectList(
+                            (
+                                from position in db.Roles
+                                where position.groupRole == 2
+                                select new SelectListItem { Text = position.nameRole, Value = position.idRole.ToString() }
+                            ), "Value", "Text");
+            ViewBag.Loadchucvu = dataList;
+        }
     }
 }
