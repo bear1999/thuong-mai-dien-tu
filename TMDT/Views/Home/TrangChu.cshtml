@@ -1,0 +1,47 @@
+﻿@model TMDT.Models._TrangChu
+@{
+    ViewBag.Title = "ChoDoCu - Trang chủ";
+    Layout = "~/Views/Shared/_TrangChu.cshtml";
+    var money = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+
+<section class="categories">
+    <div class="container mt-3">
+        <h5>Khám phá danh mục</h5>
+        <div class="catergories__list">
+            @foreach (var a in Model._Category_Product)
+            {
+
+                <a href="@Url.Action("TimKiem", "Home", new { @idCate = a.idCategory_Product })" style="text-decoration: none; color: #000;">
+                    <div class="catergories__item">
+                        <img src="~/Assets/ImageCategory/@a.imageCategory" alt="" style="border-radius: 20px; height: 100px; width:100px; object-fit: cover;" />
+                        <p>@a.nameCategory</p>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="news">
+    <div class="container mt-3 mb-3">
+        <h5>Tin đăng mới</h5>
+        <div class="news__list">
+            @foreach (var sp in Model._FullProduct)
+            {
+                <a href="san-pham/@sp.Alias/@sp.idProduct" style="text-decoration:none;">
+                    <div class="news__item">
+                        <div class="card">
+                            <img src="~/Assets/ImageProduct/@sp.imageProduct_1" class="card-img-top" alt="..." />
+                            <div class="card-body">
+                                <p class="card-text title" style="color:#000000">@sp.nameProduct</p>
+                                <div class="card-text price">@String.Format(money, "{0:c0}", sp.priceProduct)</div>
+                                <div class="card-text time">@Convert.ToDateTime(sp.datePost).ToString("dd/MM/yyyy HH:mm:ss")</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</section>
