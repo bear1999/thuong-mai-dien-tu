@@ -10,7 +10,7 @@ namespace TMDT.Controllers
 {
     public class RegisterAccountController : Controller
     {
-        ChoDoCuEntities2 db = new ChoDoCuEntities2();
+        ChoDoCuEntities db = new ChoDoCuEntities();
         [HttpGet]
         public ActionResult ThemNhanVien()
         {

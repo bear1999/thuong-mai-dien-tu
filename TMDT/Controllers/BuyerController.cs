@@ -9,7 +9,7 @@ namespace TMDT.Controllers
 {
     public class BuyerController : Controller
     {
-        ChoDoCuEntities2 db = new ChoDoCuEntities2();
+        ChoDoCuEntities db = new ChoDoCuEntities();
 
         [HttpGet]
         public ActionResult DanhSachMuaHang()

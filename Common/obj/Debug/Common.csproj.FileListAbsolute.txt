@@ -13,3 +13,9 @@ C:\Users\PC\Downloads\DoAnTMDT\Common\bin\Debug\Common.pdb
 C:\Users\PC\Downloads\DoAnTMDT\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
 C:\Users\PC\Downloads\DoAnTMDT\Common\obj\Debug\Common.dll
 C:\Users\PC\Downloads\DoAnTMDT\Common\obj\Debug\Common.pdb
+C:\Users\peheo\Desktop\cong-cu-va-phat-trien\Common\bin\Debug\Common.dll
+C:\Users\peheo\Desktop\cong-cu-va-phat-trien\Common\bin\Debug\Common.pdb
+C:\Users\peheo\Desktop\cong-cu-va-phat-trien\Common\obj\Debug\Common.csprojAssemblyReference.cache
+C:\Users\peheo\Desktop\cong-cu-va-phat-trien\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\peheo\Desktop\cong-cu-va-phat-trien\Common\obj\Debug\Common.dll
+C:\Users\peheo\Desktop\cong-cu-va-phat-trien\Common\obj\Debug\Common.pdb
