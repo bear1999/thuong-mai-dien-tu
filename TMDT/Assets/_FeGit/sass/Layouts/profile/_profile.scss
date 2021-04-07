@@ -1,0 +1,97 @@
+.details__pro{
+    .details__prol{
+        display:flex;
+        width: 100%;
+        position: relative;
+        .img__details{
+            img{
+                height: 80px;
+                width: 80px;
+                border-radius: 50%;
+            }
+        }
+        .follow{
+            .profile__name{
+                font-size: 25px;
+
+            }
+            p{
+                margin-bottom: 0;
+            }
+            a{
+                text-decoration: none;
+                color: black;
+                span{
+                    font-weight: bold;
+                }
+            }
+        }
+        .setting__pro{
+            position: absolute;
+            top: 30%;
+            left: 30%;
+            transform: translate(-20%,20%);
+            a{
+                background-color: #fff;
+                color: black;
+                border-color: grey;
+                border-radius: 10px;
+            }
+        }
+    }
+    .pro__right{
+        margin: 0;
+        .rate,.date__join,.address_pro,.chat__div,.other__social{
+            span{
+                padding:5px;
+            }
+            .first__span{
+                color:#9b9b9b;
+            }
+        }
+        .second__span{
+           i{
+               margin: 0 5px;
+               color:green;
+               border : 1px solid green;
+               width: 25px;
+               height: 25px;
+               line-height: 25px;
+               text-align: center;
+               border-radius: 50%;
+               font-size: 12px;
+           }
+        }
+    }
+}
+
+.baipost__content{
+    padding: 20px;
+    .baipost__insite{
+        h4{ 
+          border-bottom: 1px solid #9b9b9b; 
+          padding-bottom: 15px;
+        }
+        .list-group-item{
+                border: none;
+                border-bottom: 1px solid #9b9b9b;
+                width: 100%;
+                .list__content{
+                    .post__right{
+                        position: relative;
+                        .bottom{
+                            position: absolute;
+                            bottom: 0;
+                            span{
+                                color: #9b9b9b;
+                            }
+                            .name__post,.time__post{
+                                border-right: 1px solid #9b9b9b;
+                                padding-right: 5px;
+                            }
+                        }
+                    }
+                }
+        }
+    }
+}

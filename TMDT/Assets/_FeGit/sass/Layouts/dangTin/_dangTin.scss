@@ -1,0 +1,47 @@
+.list__icon{
+    width: 70%;
+}
+
+.list__content {
+    form{
+    padding: 8px;
+    padding-top: 20px;
+    padding-bottom: 80px;
+    width: 100%;
+    }
+}
+
+.list-group {
+ .list-group-item {
+      .item__icon{
+            padding : 10px;
+        }
+    }
+}
+
+
+
+.list-group{
+        .list-group-item{
+                a{
+                    color: #000;
+                    text-decoration: none;
+                    font-weight: 500;
+                }
+            }
+}
+
+.list-group{
+    .list-group-item{
+        span{
+            float: right;
+            margin-top: 8px;
+        }
+    }
+}
+
+.list-group{
+    .list-group-item{
+        cursor: pointer;
+    }
+}

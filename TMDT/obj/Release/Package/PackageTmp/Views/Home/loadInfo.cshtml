@@ -1,0 +1,12 @@
+﻿@model IEnumerable<TMDT.Models.infoAccount>
+@{
+    Layout = null;
+}
+
+@foreach (var a in Model)
+{
+    <div class="user-panel mt-3 d-flex">
+        <div class="image user-block"> <img src="~/Assets/_Apartment/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image"> </div>
+        <div class="info"><b class="d-block text-white">@a.Fullname</b><p><span class="d-block text-white"><small>(<a href="@Url.Action("DangXuat", "Login")">Đăng xuất</a>)</small></span></p> </div>
+    </div>
+}

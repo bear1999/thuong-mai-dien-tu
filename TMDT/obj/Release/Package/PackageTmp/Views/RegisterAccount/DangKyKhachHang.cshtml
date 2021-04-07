@@ -1,0 +1,57 @@
+﻿@model IEnumerable<TMDT.Models.infoAccount>
+@{
+    ViewBag.Title = "Đăng ký";
+    Layout = "~/Views/Shared/_LanAnh.cshtml";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/_Apartment/dist/css/hide-arrow-number.css">
+}
+<div class="register__form">
+    <h1>Đăng ký tài khoản</h1>
+    <div class="register__content">
+        @using (Html.BeginForm("DangKyKhachHang", "RegisterAccount", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <p><span style="color:red">@ViewData["Err"]</span></p>
+            <div class="form-group">
+                <label for="exampleInputEmail2">Email</label>
+                @Html.TextBox("Email", null, new { @class = "form-control", type = "email", id = "exampleInputEmail1", placeholder = "Email" })
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Họ tên</label>
+                @Html.TextBox("Hoten", null, new { @class = "form-control", type = "text", placeholder = "Họ tên" })
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Ngày sinh</label>
+                @Html.TextBox("Birthday", null, new { @class = "form-control", type = "date" })
+            </div>
+            <div class="form-group">
+                <label for="examplePhoneNumber1">Số điện thoại</label>
+                @Html.TextBox("PhoneNumber", null, new { @class = "form-control", type = "number", placeholder = "Số điện thoại" })
+            </div>
+            <div class="form-group">
+                <label for="exampleAddress1">Địa Chỉ</label>
+                @Html.TextBox("Address", null, new { @class = "form-control", type = "text", placeholder = "Địa chỉ" })
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword2">Mật Khẩu</label>
+                @Html.TextBox("Password", null, new { @class = "form-control", type = "password", placeholder = "Mật khẩu" })
+            </div>
+            
+            <div class="form-group">
+                <label>Bạn là</label>
+                <div class="form-check">
+                    @Html.RadioButton("idRole", 1) Người bán<p></p>
+                    @Html.RadioButton("idRole", 2) Người mua
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 btn__regis">Đăng Ký</button>
+            <p class="thoathuan">
+                Bằng việc đăng ký, bạn đồng ý với <a href="">Thỏa thuận dịch vụ</a> của
+                chúng tôi
+                và xác nhận rằng thông tin bạn cung cấp đã hoàn chỉnh và chính xác.
+            </p>
+        }
+    </div>
+</div>

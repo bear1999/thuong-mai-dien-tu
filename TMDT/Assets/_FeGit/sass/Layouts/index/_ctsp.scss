@@ -1,0 +1,171 @@
+.detail__product {
+    background-color: #fff;
+    margin-left: 100px;
+    border: 1px solid #77777754 ;
+
+    
+    .col-8{
+        padding-top: 20px;
+        padding-left: 20px;
+        .banner__item--2{
+            width: 300px;
+            height: 400px;
+        }
+        
+        .slick-track{
+                margin-left:0;
+            }
+        .banner__item.slick-active{
+            opacity: .5;
+        } 
+        .banner__item.is-active{
+            opacity: 1;
+        }
+        .title__product {
+            h2 {
+                font-size: 25px;
+                font-weight: 600;
+                margin: 15px 0;
+            }
+        }
+        .price__save {
+            p {
+                font-size: 22px;
+                margin-left: 20px;
+                font-weight: 600;
+                color: #c90927;
+                
+            }
+            .btn {
+                border-radius: 20px;
+                border: 1px solid #c90927;
+                margin-right: 5px;
+                color: #c90927;
+                margin-left: 400px;
+                .fa-heart{
+                    font-weight: 100;
+                    color: #c90927;
+                    margin-left: 5px;
+                }
+            }
+        }
+        .description__product{
+            margin: 10px 0;
+            p{
+                margin: 10px;
+            }
+            .message{
+                h3{
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: #777777;
+        
+                }
+                input{
+                    padding: 10px;
+                    border-radius: 25px;
+                    border: 1px solid #fc9807;
+                    &:focus{
+                        outline: none;
+                    }
+                }
+                button{
+                    background-color: #fc9807;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 20px;
+                    color: #fff;
+                }
+            }
+        }
+    }
+    .col-4{
+        border-left: 1px solid #77777754 ;
+        
+        .header__admim{
+            align-items: center;
+            margin: 10px;
+            img{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                border: 3px solid #fc9807
+            }
+            p{
+                margin-left: 10px;
+                align-items: center;
+                font-weight: 600;
+                padding-top: 10px;
+            }
+            button{
+                border: 1px solid #fc9807;
+                padding: 8px 15px;
+                border-radius: 25px;
+                margin-left: 130px;
+                background-color: #fff;
+                color: #fc9807;
+                font-size: 13px;
+                &:hover{
+                    border: 1px solid #ffba53;
+                    color:#ffba53 ;
+                }
+            }
+            .admin__content{
+                display: grid;
+                grid-template-columns: repeat(3,1fr);
+                color: #777777;
+                gap: 40px;
+                margin-left: 40px;
+                margin-top: 20px;
+                .admin__item{
+                    h3{
+                        font-size: 15px;
+                        margin: 0;
+
+                    }
+                    i{
+                        margin-top: 15px;
+                        margin-left: 20px;
+                    }
+                    p{
+                        padding: 10px;
+                    }
+                    
+                }
+            }   
+        }
+        .button__admin{
+            margin-left: 20px;
+            .number__admin{
+                width: 90%;
+                padding: 15px;
+                background-color: #33a837;
+                color: #fff;
+                border: none;
+                border-radius: 10px;
+                font-weight: 600;
+                &:hover{
+                    background-color: #43d448;
+                }
+                
+            }
+            .chat__admin{
+                color: #33a837;
+                background-color: #fff;
+                padding: 10px;
+                border: 1px solid #33a837;
+                width: 90%;
+                border-radius: 10px;
+                font-weight: 600;
+                &:hover{
+                    border: 1px solid #46eb4c;
+                }
+            }
+            i{
+                margin-right: 10px;
+            }
+    }
+    
+    
+}
+}

@@ -1,0 +1,32 @@
+.message{
+    .nav-pills {
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        text-align: center;
+        padding-top:10px;
+        border-bottom: 1px solid rgba(0,0,0, .1);
+        .nav-item {
+            .nav-link{
+                color: #000;
+                &:hover{
+                    border-bottom: 4px solid #fff2b5;
+                }
+            }
+            .active{
+                background: none;
+            }
+        }
+    }
+    .message__list{
+        background: url("https://static.chotot.com/storage/chat/no-room-chat-bg.png") no-repeat center center;
+        width: 100%;
+        height: 300px;
+        padding: 20px;
+    }
+    .message__content{
+        background: url(https://static.chotot.com/storage/chat/desktop-intro-no-select-room.png) #ececec;
+        min-height: 1024px;
+        background-repeat: no-repeat;
+        background-position: center 30vh;
+    }
+}

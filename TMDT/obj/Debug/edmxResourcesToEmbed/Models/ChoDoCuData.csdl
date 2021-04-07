@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChoDoCuModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ChoDoCuEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Category_Product" EntityType="ChoDoCuModel.Category_Product" />
+    <EntitySet Name="Category_Status" EntityType="ChoDoCuModel.Category_Status" />
+    <EntitySet Name="Comment_Product" EntityType="ChoDoCuModel.Comment_Product" />
+    <EntitySet Name="infoAccounts" EntityType="ChoDoCuModel.infoAccount" />
+    <EntitySet Name="listOrders" EntityType="ChoDoCuModel.listOrder" />
+    <EntitySet Name="listSells" EntityType="ChoDoCuModel.listSell" />
+    <EntitySet Name="Logins" EntityType="ChoDoCuModel.Login" />
+    <EntitySet Name="Orders" EntityType="ChoDoCuModel.Order" />
+    <EntitySet Name="Products" EntityType="ChoDoCuModel.Product" />
+    <EntitySet Name="Roles" EntityType="ChoDoCuModel.Role" />
+    <EntitySet Name="sysdiagrams" EntityType="ChoDoCuModel.sysdiagram" />
+    <AssociationSet Name="FK_Product_Category_Product" Association="ChoDoCuModel.FK_Product_Category_Product">
+      <End Role="Category_Product" EntitySet="Category_Product" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Category_Status" Association="ChoDoCuModel.FK_Order_Category_Status">
+      <End Role="Category_Status" EntitySet="Category_Status" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_Product_Login" Association="ChoDoCuModel.FK_Comment_Product_Login">
+      <End Role="Login" EntitySet="Logins" />
+      <End Role="Comment_Product" EntitySet="Comment_Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_Product_Product" Association="ChoDoCuModel.FK_Comment_Product_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Comment_Product" EntitySet="Comment_Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_infoAccount_Login" Association="ChoDoCuModel.FK_infoAccount_Login">
+      <End Role="Login" EntitySet="Logins" />
+      <End Role="infoAccount" EntitySet="infoAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_infoAccount_Role" Association="ChoDoCuModel.FK_infoAccount_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="infoAccount" EntitySet="infoAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_listOrder_Order" Association="ChoDoCuModel.FK_listOrder_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="listOrder" EntitySet="listOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_listOrder_Product" Association="ChoDoCuModel.FK_listOrder_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="listOrder" EntitySet="listOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_listSell_Login" Association="ChoDoCuModel.FK_listSell_Login">
+      <End Role="Login" EntitySet="Logins" />
+      <End Role="listSell" EntitySet="listSells" />
+    </AssociationSet>
+    <AssociationSet Name="FK_listSell_Product" Association="ChoDoCuModel.FK_listSell_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="listSell" EntitySet="listSells" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Login" Association="ChoDoCuModel.FK_Order_Login">
+      <End Role="Login" EntitySet="Logins" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Login" Association="ChoDoCuModel.FK_Product_Login">
+      <End Role="Login" EntitySet="Logins" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Category_Product">
+    <Key>
+      <PropertyRef Name="idCategory_Product" />
+    </Key>
+    <Property Name="idCategory_Product" Type="Int32" Nullable="false" />
+    <Property Name="nameCategory" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="imageCategory" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="iconCategory" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Products" Relationship="ChoDoCuModel.FK_Product_Category_Product" FromRole="Category_Product" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Category_Status">
+    <Key>
+      <PropertyRef Name="idCate_status" />
+    </Key>
+    <Property Name="idCate_status" Type="Int32" Nullable="false" />
+    <Property Name="nameStatus" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Orders" Relationship="ChoDoCuModel.FK_Order_Category_Status" FromRole="Category_Status" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Comment_Product">
+    <Key>
+      <PropertyRef Name="idComment" />
+    </Key>
+    <Property Name="idComment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="contentCmt" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="idAccount" Type="Int32" Nullable="false" />
+    <Property Name="idProduct" Type="Int32" Nullable="false" />
+    <Property Name="hideCmt" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Login" Relationship="ChoDoCuModel.FK_Comment_Product_Login" FromRole="Comment_Product" ToRole="Login" />
+    <NavigationProperty Name="Product" Relationship="ChoDoCuModel.FK_Comment_Product_Product" FromRole="Comment_Product" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="infoAccount">
+    <Key>
+      <PropertyRef Name="idSql" />
+    </Key>
+    <Property Name="idSql" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="Fullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="idRole" Type="Int32" Nullable="false" />
+    <Property Name="idAccount" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Login" Relationship="ChoDoCuModel.FK_infoAccount_Login" FromRole="infoAccount" ToRole="Login" />
+    <NavigationProperty Name="Role" Relationship="ChoDoCuModel.FK_infoAccount_Role" FromRole="infoAccount" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="listOrder">
+    <Key>
+      <PropertyRef Name="idOrder" />
+      <PropertyRef Name="idProduct" />
+    </Key>
+    <Property Name="idOrder" Type="Int32" Nullable="false" />
+    <Property Name="idProduct" Type="Int32" Nullable="false" />
+    <Property Name="amountProduct" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="ChoDoCuModel.FK_listOrder_Order" FromRole="listOrder" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="ChoDoCuModel.FK_listOrder_Product" FromRole="listOrder" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="listSell">
+    <Key>
+      <PropertyRef Name="id_listSell" />
+    </Key>
+    <Property Name="id_listSell" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idProduct" Type="Int32" Nullable="false" />
+    <Property Name="dateSell" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="idAccount_Buy" Type="Int32" Nullable="false" />
+    <Property Name="amountProduct" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Login" Relationship="ChoDoCuModel.FK_listSell_Login" FromRole="listSell" ToRole="Login" />
+    <NavigationProperty Name="Product" Relationship="ChoDoCuModel.FK_listSell_Product" FromRole="listSell" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="idAccount" />
+    </Key>
+    <Property Name="idAccount" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="hideAcc" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Comment_Product" Relationship="ChoDoCuModel.FK_Comment_Product_Login" FromRole="Login" ToRole="Comment_Product" />
+    <NavigationProperty Name="infoAccounts" Relationship="ChoDoCuModel.FK_infoAccount_Login" FromRole="Login" ToRole="infoAccount" />
+    <NavigationProperty Name="listSells" Relationship="ChoDoCuModel.FK_listSell_Login" FromRole="Login" ToRole="listSell" />
+    <NavigationProperty Name="Orders" Relationship="ChoDoCuModel.FK_Order_Login" FromRole="Login" ToRole="Order" />
+    <NavigationProperty Name="Products" Relationship="ChoDoCuModel.FK_Product_Login" FromRole="Login" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="idOrder" />
+    </Key>
+    <Property Name="idOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idAccount" Type="Int32" Nullable="false" />
+    <Property Name="dateOrder" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="statusOrder" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Category_Status" Relationship="ChoDoCuModel.FK_Order_Category_Status" FromRole="Order" ToRole="Category_Status" />
+    <NavigationProperty Name="listOrders" Relationship="ChoDoCuModel.FK_listOrder_Order" FromRole="Order" ToRole="listOrder" />
+    <NavigationProperty Name="Login" Relationship="ChoDoCuModel.FK_Order_Login" FromRole="Order" ToRole="Login" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="idProduct" />
+    </Key>
+    <Property Name="idProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nameProduct" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="priceProduct" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="amountProduct" Type="Int32" Nullable="false" />
+    <Property Name="descriptionProduct" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="datePost" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="idCategory_Product" Type="Int32" Nullable="false" />
+    <Property Name="idAccount" Type="Int32" Nullable="false" />
+    <Property Name="hideProduct" Type="Boolean" Nullable="false" />
+    <Property Name="imageProduct_1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="imageProduct_2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="imageProduct_3" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="imageProduct_4" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Alias" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="confirmProduct" Type="Boolean" />
+    <NavigationProperty Name="Category_Product" Relationship="ChoDoCuModel.FK_Product_Category_Product" FromRole="Product" ToRole="Category_Product" />
+    <NavigationProperty Name="Comment_Product" Relationship="ChoDoCuModel.FK_Comment_Product_Product" FromRole="Product" ToRole="Comment_Product" />
+    <NavigationProperty Name="listOrders" Relationship="ChoDoCuModel.FK_listOrder_Product" FromRole="Product" ToRole="listOrder" />
+    <NavigationProperty Name="listSells" Relationship="ChoDoCuModel.FK_listSell_Product" FromRole="Product" ToRole="listSell" />
+    <NavigationProperty Name="Login" Relationship="ChoDoCuModel.FK_Product_Login" FromRole="Product" ToRole="Login" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="idRole" />
+    </Key>
+    <Property Name="idRole" Type="Int32" Nullable="false" />
+    <Property Name="nameRole" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="groupRole" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="infoAccounts" Relationship="ChoDoCuModel.FK_infoAccount_Role" FromRole="Role" ToRole="infoAccount" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Product_Category_Product">
+    <End Type="ChoDoCuModel.Category_Product" Role="Category_Product" Multiplicity="1" />
+    <End Type="ChoDoCuModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category_Product">
+        <PropertyRef Name="idCategory_Product" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="idCategory_Product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Category_Status">
+    <End Type="ChoDoCuModel.Category_Status" Role="Category_Status" Multiplicity="1" />
+    <End Type="ChoDoCuModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category_Status">
+        <PropertyRef Name="idCate_status" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="statusOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_Product_Login">
+    <End Type="ChoDoCuModel.Login" Role="Login" Multiplicity="1" />
+    <End Type="ChoDoCuModel.Comment_Product" Role="Comment_Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="idAccount" />
+      </Principal>
+      <Dependent Role="Comment_Product">
+        <PropertyRef Name="idAccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_Product_Product">
+    <End Type="ChoDoCuModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="ChoDoCuModel.Comment_Product" Role="Comment_Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="idProduct" />
+      </Principal>
+      <Dependent Role="Comment_Product">
+        <PropertyRef Name="idProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_infoAccount_Login">
+    <End Type="ChoDoCuModel.Login" Role="Login" Multiplicity="1" />
+    <End Type="ChoDoCuModel.infoAccount" Role="infoAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="idAccount" />
+      </Principal>
+      <Dependent Role="infoAccount">
+        <PropertyRef Name="idAccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_infoAccount_Role">
+    <End Type="ChoDoCuModel.Role" Role="Role" Multiplicity="1" />
+    <End Type="ChoDoCuModel.infoAccount" Role="infoAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="idRole" />
+      </Principal>
+      <Dependent Role="infoAccount">
+        <PropertyRef Name="idRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_listOrder_Order">
+    <End Type="ChoDoCuModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="ChoDoCuModel.listOrder" Role="listOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="idOrder" />
+      </Principal>
+      <Dependent Role="listOrder">
+        <PropertyRef Name="idOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_listOrder_Product">
+    <End Type="ChoDoCuModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="ChoDoCuModel.listOrder" Role="listOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="idProduct" />
+      </Principal>
+      <Dependent Role="listOrder">
+        <PropertyRef Name="idProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_listSell_Login">
+    <End Type="ChoDoCuModel.Login" Role="Login" Multiplicity="1" />
+    <End Type="ChoDoCuModel.listSell" Role="listSell" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="idAccount" />
+      </Principal>
+      <Dependent Role="listSell">
+        <PropertyRef Name="idAccount_Buy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_listSell_Product">
+    <End Type="ChoDoCuModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="ChoDoCuModel.listSell" Role="listSell" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="idProduct" />
+      </Principal>
+      <Dependent Role="listSell">
+        <PropertyRef Name="idProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Login">
+    <End Type="ChoDoCuModel.Login" Role="Login" Multiplicity="1" />
+    <End Type="ChoDoCuModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="idAccount" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="idAccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Login">
+    <End Type="ChoDoCuModel.Login" Role="Login" Multiplicity="1" />
+    <End Type="ChoDoCuModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="idAccount" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="idAccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

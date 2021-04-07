@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="43d887dfa79f4db88743cc58aacdd682" Name="Diagram1">
+        <EntityTypeShape EntityType="ChoDoCuModel.Category_Product" Width="1.5" PointX="0.75" PointY="7.875" />
+        <EntityTypeShape EntityType="ChoDoCuModel.Category_Status" Width="1.5" PointX="3.75" PointY="6.875" />
+        <EntityTypeShape EntityType="ChoDoCuModel.Comment_Product" Width="1.5" PointX="8.25" PointY="11.625" />
+        <EntityTypeShape EntityType="ChoDoCuModel.infoAccount" Width="1.5" PointX="6" PointY="15.375" />
+        <EntityTypeShape EntityType="ChoDoCuModel.listOrder" Width="1.5" PointX="11.25" PointY="10.375" />
+        <EntityTypeShape EntityType="ChoDoCuModel.listSell" Width="1.5" PointX="5.25" PointY="11.625" />
+        <EntityTypeShape EntityType="ChoDoCuModel.listShip" Width="1.5" PointX="8.25" PointY="7.375" />
+        <EntityTypeShape EntityType="ChoDoCuModel.Login" Width="1.5" PointX="0.75" PointY="11.375" />
+        <EntityTypeShape EntityType="ChoDoCuModel.Order" Width="1.5" PointX="6" PointY="7.375" />
+        <EntityTypeShape EntityType="ChoDoCuModel.Product" Width="1.5" PointX="3" PointY="10.375" />
+        <EntityTypeShape EntityType="ChoDoCuModel.Role" Width="1.5" PointX="3.75" PointY="16.875" />
+        <AssociationConnector Association="ChoDoCuModel.FK_Product_Category_Product" />
+        <AssociationConnector Association="ChoDoCuModel.FK_listShip_Category_Status" />
+        <AssociationConnector Association="ChoDoCuModel.FK_Order_Category_Status" />
+        <AssociationConnector Association="ChoDoCuModel.FK_Comment_Product_Login" />
+        <AssociationConnector Association="ChoDoCuModel.FK_Comment_Product_Product" />
+        <AssociationConnector Association="ChoDoCuModel.FK_infoAccount_Login" />
+        <AssociationConnector Association="ChoDoCuModel.FK_infoAccount_Role" />
+        <AssociationConnector Association="ChoDoCuModel.FK_listOrder_Order" />
+        <AssociationConnector Association="ChoDoCuModel.FK_listOrder_Product" />
+        <AssociationConnector Association="ChoDoCuModel.FK_listSell_Login" />
+        <AssociationConnector Association="ChoDoCuModel.FK_listSell_Product" />
+        <AssociationConnector Association="ChoDoCuModel.FK_listShip_Login" />
+        <AssociationConnector Association="ChoDoCuModel.FK_listShip_Order" />
+        <AssociationConnector Association="ChoDoCuModel.FK_Order_Login" />
+        <AssociationConnector Association="ChoDoCuModel.FK_Product_Login" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

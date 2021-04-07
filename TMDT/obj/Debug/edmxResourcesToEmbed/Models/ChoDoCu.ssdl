@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChoDoCuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Category_Product">
+    <Key>
+      <PropertyRef Name="idCategory_Product" />
+    </Key>
+    <Property Name="idCategory_Product" Type="int" Nullable="false" />
+    <Property Name="nameCategory" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="imageCategory" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="iconCategory" Type="varchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category_Status">
+    <Key>
+      <PropertyRef Name="idCate_status" />
+    </Key>
+    <Property Name="idCate_status" Type="int" Nullable="false" />
+    <Property Name="nameStatus" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comment_Product">
+    <Key>
+      <PropertyRef Name="idComment" />
+    </Key>
+    <Property Name="idComment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="contentCmt" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="idAccount" Type="int" Nullable="false" />
+    <Property Name="idProduct" Type="int" Nullable="false" />
+    <Property Name="hideCmt" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="infoAccount">
+    <Key>
+      <PropertyRef Name="idSql" />
+    </Key>
+    <Property Name="idSql" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="Fullname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Birthday" Type="date" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="idRole" Type="int" Nullable="false" />
+    <Property Name="idAccount" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="listOrder">
+    <Key>
+      <PropertyRef Name="idOrder" />
+      <PropertyRef Name="idProduct" />
+    </Key>
+    <Property Name="idOrder" Type="int" Nullable="false" />
+    <Property Name="idProduct" Type="int" Nullable="false" />
+    <Property Name="amountProduct" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="listSell">
+    <Key>
+      <PropertyRef Name="id_listSell" />
+    </Key>
+    <Property Name="id_listSell" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idProduct" Type="int" Nullable="false" />
+    <Property Name="dateSell" Type="datetime" Nullable="false" />
+    <Property Name="idAccount_Buy" Type="int" Nullable="false" />
+    <Property Name="amountProduct" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="listShip">
+    <Key>
+      <PropertyRef Name="idShip" />
+    </Key>
+    <Property Name="idShip" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idAccount" Type="int" />
+    <Property Name="idOrder" Type="int" />
+    <Property Name="Category_Status" Type="int" />
+    <Property Name="confirmShip" Type="bit" />
+    <Property Name="idCustomer" Type="int" />
+    <Property Name="hideShip" Type="bit" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="idAccount" />
+    </Key>
+    <Property Name="idAccount" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="32" Nullable="false" />
+    <Property Name="hideAcc" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="idOrder" />
+    </Key>
+    <Property Name="idOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idAccount" Type="int" Nullable="false" />
+    <Property Name="dateOrder" Type="datetime" Nullable="false" />
+    <Property Name="Category_Status" Type="int" Nullable="false" />
+    <Property Name="hideOrder" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="idProduct" />
+    </Key>
+    <Property Name="idProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nameProduct" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="priceProduct" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="amountProduct" Type="int" Nullable="false" />
+    <Property Name="descriptionProduct" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="datePost" Type="datetime" Nullable="false" />
+    <Property Name="idCategory_Product" Type="int" Nullable="false" />
+    <Property Name="idAccount" Type="int" Nullable="false" />
+    <Property Name="hideProduct" Type="bit" Nullable="false" />
+    <Property Name="imageProduct_1" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="imageProduct_2" Type="varchar" MaxLength="255" />
+    <Property Name="imageProduct_3" Type="varchar" MaxLength="255" />
+    <Property Name="imageProduct_4" Type="varchar" MaxLength="255" />
+    <Property Name="Alias" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="confirmProduct" Type="bit" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="idRole" />
+    </Key>
+    <Property Name="idRole" Type="int" Nullable="false" />
+    <Property Name="nameRole" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="groupRole" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Comment_Product_Login">
+    <End Role="Login" Type="Self.Login" Multiplicity="1" />
+    <End Role="Comment_Product" Type="Self.Comment_Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="idAccount" />
+      </Principal>
+      <Dependent Role="Comment_Product">
+        <PropertyRef Name="idAccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_Product_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Comment_Product" Type="Self.Comment_Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="idProduct" />
+      </Principal>
+      <Dependent Role="Comment_Product">
+        <PropertyRef Name="idProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_infoAccount_Login">
+    <End Role="Login" Type="Self.Login" Multiplicity="1" />
+    <End Role="infoAccount" Type="Self.infoAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="idAccount" />
+      </Principal>
+      <Dependent Role="infoAccount">
+        <PropertyRef Name="idAccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_infoAccount_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="infoAccount" Type="Self.infoAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="idRole" />
+      </Principal>
+      <Dependent Role="infoAccount">
+        <PropertyRef Name="idRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_listOrder_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="listOrder" Type="Self.listOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="idOrder" />
+      </Principal>
+      <Dependent Role="listOrder">
+        <PropertyRef Name="idOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_listOrder_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="listOrder" Type="Self.listOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="idProduct" />
+      </Principal>
+      <Dependent Role="listOrder">
+        <PropertyRef Name="idProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_listSell_Login">
+    <End Role="Login" Type="Self.Login" Multiplicity="1" />
+    <End Role="listSell" Type="Self.listSell" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="idAccount" />
+      </Principal>
+      <Dependent Role="listSell">
+        <PropertyRef Name="idAccount_Buy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_listSell_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="listSell" Type="Self.listSell" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="idProduct" />
+      </Principal>
+      <Dependent Role="listSell">
+        <PropertyRef Name="idProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_listShip_Category_Status">
+    <End Role="Category_Status" Type="Self.Category_Status" Multiplicity="0..1" />
+    <End Role="listShip" Type="Self.listShip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category_Status">
+        <PropertyRef Name="idCate_status" />
+      </Principal>
+      <Dependent Role="listShip">
+        <PropertyRef Name="Category_Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_listShip_Login">
+    <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
+    <End Role="listShip" Type="Self.listShip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="idAccount" />
+      </Principal>
+      <Dependent Role="listShip">
+        <PropertyRef Name="idAccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_listShip_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+    <End Role="listShip" Type="Self.listShip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="idOrder" />
+      </Principal>
+      <Dependent Role="listShip">
+        <PropertyRef Name="idOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Category_Status">
+    <End Role="Category_Status" Type="Self.Category_Status" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category_Status">
+        <PropertyRef Name="idCate_status" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="Category_Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Login">
+    <End Role="Login" Type="Self.Login" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="idAccount" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="idAccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Category_Product">
+    <End Role="Category_Product" Type="Self.Category_Product" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category_Product">
+        <PropertyRef Name="idCategory_Product" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="idCategory_Product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Login">
+    <End Role="Login" Type="Self.Login" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="idAccount" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="idAccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ChoDoCuModelStoreContainer">
+    <EntitySet Name="Category_Product" EntityType="Self.Category_Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category_Status" EntityType="Self.Category_Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comment_Product" EntityType="Self.Comment_Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="infoAccount" EntityType="Self.infoAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="listOrder" EntityType="Self.listOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="listSell" EntityType="Self.listSell" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="listShip" EntityType="Self.listShip" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Comment_Product_Login" Association="Self.FK_Comment_Product_Login">
+      <End Role="Login" EntitySet="Login" />
+      <End Role="Comment_Product" EntitySet="Comment_Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_Product_Product" Association="Self.FK_Comment_Product_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Comment_Product" EntitySet="Comment_Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_infoAccount_Login" Association="Self.FK_infoAccount_Login">
+      <End Role="Login" EntitySet="Login" />
+      <End Role="infoAccount" EntitySet="infoAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_infoAccount_Role" Association="Self.FK_infoAccount_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="infoAccount" EntitySet="infoAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_listOrder_Order" Association="Self.FK_listOrder_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="listOrder" EntitySet="listOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_listOrder_Product" Association="Self.FK_listOrder_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="listOrder" EntitySet="listOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_listSell_Login" Association="Self.FK_listSell_Login">
+      <End Role="Login" EntitySet="Login" />
+      <End Role="listSell" EntitySet="listSell" />
+    </AssociationSet>
+    <AssociationSet Name="FK_listSell_Product" Association="Self.FK_listSell_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="listSell" EntitySet="listSell" />
+    </AssociationSet>
+    <AssociationSet Name="FK_listShip_Category_Status" Association="Self.FK_listShip_Category_Status">
+      <End Role="Category_Status" EntitySet="Category_Status" />
+      <End Role="listShip" EntitySet="listShip" />
+    </AssociationSet>
+    <AssociationSet Name="FK_listShip_Login" Association="Self.FK_listShip_Login">
+      <End Role="Login" EntitySet="Login" />
+      <End Role="listShip" EntitySet="listShip" />
+    </AssociationSet>
+    <AssociationSet Name="FK_listShip_Order" Association="Self.FK_listShip_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="listShip" EntitySet="listShip" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Category_Status" Association="Self.FK_Order_Category_Status">
+      <End Role="Category_Status" EntitySet="Category_Status" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Login" Association="Self.FK_Order_Login">
+      <End Role="Login" EntitySet="Login" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Category_Product" Association="Self.FK_Product_Category_Product">
+      <End Role="Category_Product" EntitySet="Category_Product" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Login" Association="Self.FK_Product_Login">
+      <End Role="Login" EntitySet="Login" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

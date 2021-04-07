@@ -1,0 +1,92 @@
+﻿@model IEnumerable<TMDT.Models._FullAccountInfo>
+@{
+    ViewBag.Title = "Quản lý nhân viên";
+    Layout = "~/Views/Shared/_Dashboard_1.cshtml";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Assets/_Apartment/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+}
+@section scripts {
+    <script src="~/Assets/_Apartment/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Assets/_Apartment/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <script>
+        $(function () {
+            $("#example1").DataTable({ "lengthMenu": [[10, 25, 50, 150, 200], [10, 25, 50, 150, 200]] }); //Cái [] ngoài cùng hiện tên vd:"Tất cả" thì = -1
+        });
+    </script>
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Quản lý nhân viên</h1>
+                </div>
+                <!-- /.col -->
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"><span style="color:red"><b>Danh sách nhân viên</b></span></h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-2">
+                        <table id="example1" class="table table-bordered table-striped text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>STT</th>
+                                    <th>Mã NV</th>
+                                    <th>Họ tên</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Ngày sinh</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Chức vụ</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{int i = 0; }
+                                @foreach (var kh in Model)
+                                {
+                                    i++;
+                                    <tr>
+                                        <td><a href="@Url.Action("CapNhatNhanVien", "Manager", new { id = kh.idAccount })"><i class="nav-icon fas fa-edit"></i></a></td>
+                                        <td>@i</td>
+                                        <td>@Html.DisplayFor(a => kh.idAccount)</td>
+                                        <td>@Html.DisplayFor(a => kh.Fullname)</td>
+                                        <td>@Html.DisplayFor(a => kh.Email)</td>
+                                        <td>@Html.DisplayFor(a => kh.PhoneNumber)</td>
+                                        <td>@Convert.ToDateTime(kh.Birthday).ToString("dd/MM/yyyy")</td>
+                                        <td>@Html.DisplayFor(a => kh.Address)</td>
+                                        <td>@Html.DisplayFor(a => kh.ChucVu)</td>
+                                        <td><a href="@Url.Action("VoHieuHoa", "Manager", new { id = kh.idAccount })" onclick="return confirm('Bạn có chắc muốn vô hiệu hóa tài khoản này ?')">Vô hiệu hóa</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- End Main content -->
+</div>
+

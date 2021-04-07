@@ -1,0 +1,15 @@
+C:\Users\Administrator\Desktop\TMDT\Common\bin\Debug\Common.dll
+C:\Users\Administrator\Desktop\TMDT\Common\bin\Debug\Common.pdb
+C:\Users\Administrator\Desktop\TMDT\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\TMDT\Common\obj\Debug\Common.dll
+C:\Users\Administrator\Desktop\TMDT\Common\obj\Debug\Common.pdb
+D:\Games\TMDT\Common\bin\Debug\Common.dll
+D:\Games\TMDT\Common\bin\Debug\Common.pdb
+D:\Games\TMDT\Common\obj\Debug\Common.dll
+D:\Games\TMDT\Common\obj\Debug\Common.pdb
+D:\Games\TMDT\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+C:\Users\PC\Downloads\DoAnTMDT\Common\bin\Debug\Common.dll
+C:\Users\PC\Downloads\DoAnTMDT\Common\bin\Debug\Common.pdb
+C:\Users\PC\Downloads\DoAnTMDT\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+C:\Users\PC\Downloads\DoAnTMDT\Common\obj\Debug\Common.dll
+C:\Users\PC\Downloads\DoAnTMDT\Common\obj\Debug\Common.pdb

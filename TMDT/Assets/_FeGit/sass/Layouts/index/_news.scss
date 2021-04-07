@@ -1,0 +1,32 @@
+.news{
+    .container{
+       background: white;
+        h5{
+            padding-top: 13px;
+            font-weight: 700;
+        }
+        .news__list{
+            display: grid;
+            grid-template-columns: repeat(5,220px);       
+            .news__item{
+                padding:0 .5rem .5rem;
+                .title, .price, .time{
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                .price{
+                    color: red;
+                    font-weight: 700;
+                }
+                .time{
+                    font-size: 11px;
+                    color: #9b9b9b;
+                }
+                &:hover{
+                    border: 1px solid red;
+                }
+            }
+        }
+    }
+}

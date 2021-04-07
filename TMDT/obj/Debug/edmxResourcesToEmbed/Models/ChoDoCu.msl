@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ChoDoCuModelStoreContainer" CdmEntityContainer="ChoDoCuEntities">
+    <EntitySetMapping Name="Category_Product">
+      <EntityTypeMapping TypeName="ChoDoCuModel.Category_Product">
+        <MappingFragment StoreEntitySet="Category_Product">
+          <ScalarProperty Name="iconCategory" ColumnName="iconCategory" />
+          <ScalarProperty Name="imageCategory" ColumnName="imageCategory" />
+          <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+          <ScalarProperty Name="idCategory_Product" ColumnName="idCategory_Product" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Category_Status">
+      <EntityTypeMapping TypeName="ChoDoCuModel.Category_Status">
+        <MappingFragment StoreEntitySet="Category_Status">
+          <ScalarProperty Name="nameStatus" ColumnName="nameStatus" />
+          <ScalarProperty Name="idCate_status" ColumnName="idCate_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comment_Product">
+      <EntityTypeMapping TypeName="ChoDoCuModel.Comment_Product">
+        <MappingFragment StoreEntitySet="Comment_Product">
+          <ScalarProperty Name="hideCmt" ColumnName="hideCmt" />
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+          <ScalarProperty Name="idAccount" ColumnName="idAccount" />
+          <ScalarProperty Name="contentCmt" ColumnName="contentCmt" />
+          <ScalarProperty Name="idComment" ColumnName="idComment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="infoAccounts">
+      <EntityTypeMapping TypeName="ChoDoCuModel.infoAccount">
+        <MappingFragment StoreEntitySet="infoAccount">
+          <ScalarProperty Name="idAccount" ColumnName="idAccount" />
+          <ScalarProperty Name="idRole" ColumnName="idRole" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="idSql" ColumnName="idSql" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="listOrders">
+      <EntityTypeMapping TypeName="ChoDoCuModel.listOrder">
+        <MappingFragment StoreEntitySet="listOrder">
+          <ScalarProperty Name="amountProduct" ColumnName="amountProduct" />
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="listSells">
+      <EntityTypeMapping TypeName="ChoDoCuModel.listSell">
+        <MappingFragment StoreEntitySet="listSell">
+          <ScalarProperty Name="amountProduct" ColumnName="amountProduct" />
+          <ScalarProperty Name="idAccount_Buy" ColumnName="idAccount_Buy" />
+          <ScalarProperty Name="dateSell" ColumnName="dateSell" />
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+          <ScalarProperty Name="id_listSell" ColumnName="id_listSell" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="listShips">
+      <EntityTypeMapping TypeName="ChoDoCuModel.listShip">
+        <MappingFragment StoreEntitySet="listShip">
+          <ScalarProperty Name="hideShip" ColumnName="hideShip" />
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="confirmShip" ColumnName="confirmShip" />
+          <ScalarProperty Name="Category_Status" ColumnName="Category_Status" />
+          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+          <ScalarProperty Name="idAccount" ColumnName="idAccount" />
+          <ScalarProperty Name="idShip" ColumnName="idShip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Logins">
+      <EntityTypeMapping TypeName="ChoDoCuModel.Login">
+        <MappingFragment StoreEntitySet="Login">
+          <ScalarProperty Name="hideAcc" ColumnName="hideAcc" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="idAccount" ColumnName="idAccount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="ChoDoCuModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="hideOrder" ColumnName="hideOrder" />
+          <ScalarProperty Name="Category_Status" ColumnName="Category_Status" />
+          <ScalarProperty Name="dateOrder" ColumnName="dateOrder" />
+          <ScalarProperty Name="idAccount" ColumnName="idAccount" />
+          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="ChoDoCuModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="confirmProduct" ColumnName="confirmProduct" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="imageProduct_4" ColumnName="imageProduct_4" />
+          <ScalarProperty Name="imageProduct_3" ColumnName="imageProduct_3" />
+          <ScalarProperty Name="imageProduct_2" ColumnName="imageProduct_2" />
+          <ScalarProperty Name="imageProduct_1" ColumnName="imageProduct_1" />
+          <ScalarProperty Name="hideProduct" ColumnName="hideProduct" />
+          <ScalarProperty Name="idAccount" ColumnName="idAccount" />
+          <ScalarProperty Name="idCategory_Product" ColumnName="idCategory_Product" />
+          <ScalarProperty Name="datePost" ColumnName="datePost" />
+          <ScalarProperty Name="descriptionProduct" ColumnName="descriptionProduct" />
+          <ScalarProperty Name="amountProduct" ColumnName="amountProduct" />
+          <ScalarProperty Name="priceProduct" ColumnName="priceProduct" />
+          <ScalarProperty Name="nameProduct" ColumnName="nameProduct" />
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="ChoDoCuModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="groupRole" ColumnName="groupRole" />
+          <ScalarProperty Name="nameRole" ColumnName="nameRole" />
+          <ScalarProperty Name="idRole" ColumnName="idRole" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

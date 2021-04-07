@@ -1,0 +1,182 @@
+﻿@model TMDT.Models._TrangCaNhan
+@{
+    foreach (var e in Model._FullProduct)
+    {
+        ViewBag.Title = e.Fullname + " - Trang cá nhân";
+    }
+    Layout = "~/Views/Shared/_TrangChu.cshtml";
+    var money = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+
+<section class="detail">
+    <div class="detail__content">
+        <div class="detail__items container">
+            <div class="details__pro bg-white p-3 pb-3">
+                @foreach (var a in Model._FullAccountInfo)
+                {
+                    <div class="row">
+                        <div class="col-6 p-3">
+                            <div class="details__prol" style="border-right: 1px solid grey; height: 100px;">
+                                <div class="img__details">
+                                    <img class="img-fluid" src="~/Assets/_Apartment/dist/img/avatar.png" alt="">
+                                </div>
+                                <div class="follow px-2">
+                                    <p class="profile__name" style="padding-top: 20px; padding-left: 10px;">@a.Fullname</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 py-3 pro__right">
+                            <div class="date__join row">
+                                <span class="first__span"><i class="fas fa-envelope"></i> Email:  </span>
+                                <span class="second__span">  @a.Email</span>
+                            </div>
+                            <div class="date__join row">
+                                <span class="first__span"><i class="fas fa-phone-square"></i> Số điện thoại:  </span>
+                                <span class="second__span">  @a.PhoneNumber</span>
+                            </div>
+                            <div class="address_pro row">
+                                <span class="first__span"><i class="fa fa-map-marker-alt"></i> Địa chỉ:  </span>
+                                <span class="second__span">
+                                    @a.Address
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="baipost__content bg-white my-4 ">
+                @foreach (var b in Model._FullProduct)
+                {
+                    <a href="san-pham/@b.Alias/@b.idProduct" style="text-decoration:none;">
+                        <div class="baipost__insite">
+                            <div class="baipost__noidung container">
+                                <div role="button">
+                                    <div class="row">
+                                        <div class="list-group-item item__div">
+                                            <div class="list__content">
+                                                <div class="col-2">
+                                                    <div class="left__img">
+                                                        <img src="~/Assets/ImageProduct/@b.imageProduct_1">
+                                                    </div>
+                                                </div>
+                                                <div class="col-10 post__right">
+                                                    <div class="right__content">
+                                                        <h3>@b.nameProduct</h3>
+                                                        <p style="color: red;font-weight: bold;">@String.Format(money, "{0:c0}", b.priceProduct)</p>
+                                                    </div>
+                                                    <span style="color: #626262;">Ngày đăng: @Convert.ToDateTime(b.datePost).ToString("dd/MM/yyyy HH:mm:ss")</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .details__pro .details__prol {
+        display: flex;
+        width: 100%;
+        position: relative;
+    }
+
+        .details__pro .details__prol .img__details img {
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+        }
+
+        .details__pro .details__prol .follow .profile__name {
+            font-size: 25px;
+        }
+
+        .details__pro .details__prol .follow p {
+            margin-bottom: 0;
+        }
+
+        .details__pro .details__prol .follow a {
+            text-decoration: none;
+            color: black;
+        }
+
+            .details__pro .details__prol .follow a span {
+                font-weight: bold;
+            }
+
+        .details__pro .details__prol .setting__pro {
+            position: absolute;
+            top: 30%;
+            left: 30%;
+            transform: translate(-20%, 20%);
+        }
+
+            .details__pro .details__prol .setting__pro a {
+                background-color: #fff;
+                color: black;
+                border-color: grey;
+                border-radius: 10px;
+            }
+
+    .details__pro .pro__right {
+        margin: 0;
+    }
+
+        .details__pro .pro__right .rate span, .details__pro .pro__right .date__join span, .details__pro .pro__right .address_pro span, .details__pro .pro__right .chat__div span, .details__pro .pro__right .other__social span {
+            padding: 5px;
+        }
+
+        .details__pro .pro__right .rate .first__span, .details__pro .pro__right .date__join .first__span, .details__pro .pro__right .address_pro .first__span, .details__pro .pro__right .chat__div .first__span, .details__pro .pro__right .other__social .first__span {
+            color: #9b9b9b;
+        }
+
+        .details__pro .pro__right .second__span i {
+            margin: 0 5px;
+            color: green;
+            border: 1px solid green;
+            width: 25px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            border-radius: 50%;
+            font-size: 12px;
+        }
+
+    .baipost__content {
+        padding: 20px;
+    }
+
+        .baipost__content .baipost__insite h4 {
+            border-bottom: 1px solid #9b9b9b;
+            padding-bottom: 15px;
+        }
+
+        .baipost__content .baipost__insite .list-group-item {
+            border: none;
+            border-bottom: 1px solid #9b9b9b;
+            width: 100%;
+        }
+
+            .baipost__content .baipost__insite .list-group-item .list__content .post__right {
+                position: relative;
+            }
+
+                .baipost__content .baipost__insite .list-group-item .list__content .post__right .bottom {
+                    position: absolute;
+                    bottom: 0;
+                }
+
+                    .baipost__content .baipost__insite .list-group-item .list__content .post__right .bottom span {
+                        color: #9b9b9b;
+                    }
+
+                    .baipost__content .baipost__insite .list-group-item .list__content .post__right .bottom .name__post, .baipost__content .baipost__insite .list-group-item .list__content .post__right .bottom .time__post {
+                        border-right: 1px solid #9b9b9b;
+                        padding-right: 5px;
+                    }
+</style>

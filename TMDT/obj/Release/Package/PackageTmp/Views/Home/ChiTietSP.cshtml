@@ -1,0 +1,89 @@
+﻿@model IEnumerable<TMDT.Models._FullProduct>
+@{
+    foreach (var a in Model)
+    {
+        ViewBag.Title = @a.nameProduct;
+    }
+    Layout = "~/Views/Shared/_TrangChu.cshtml";
+    var money = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+@foreach (var a in Model)
+{
+    <section class="detail__product row w-75 m-auto">
+        <div class="col-8">
+            <div class="picture__carousel owl-carousel">
+                <div class="banner__item--2 d-block slider slider-single">
+                    <div><img src="~/Assets/ImageProduct/@a.imageProduct_1" alt="" class="img-fluid" /></div>
+                    <div><img src="~/Assets/ImageProduct/@a.imageProduct_2" alt="" class="img-fluid" /></div>
+                    <div><img src="~/Assets/ImageProduct/@a.imageProduct_3" alt="" class="img-fluid" /></div>
+                    <div><img src="~/Assets/ImageProduct/@a.imageProduct_4" alt="" class="img-fluid" /></div>
+                </div>
+                <hr />
+                <div class="banner__listPic f-left slider slider-nav">
+                    <div class="banner__item">
+                        <img src="~/Assets/ImageProduct/@a.imageProduct_1" alt="" class="img-fluid" />
+                    </div>
+                    <div class="banner__item">
+                        <img src="~/Assets/ImageProduct/@a.imageProduct_2" alt="" class="img-fluid" />
+                    </div>
+                    <div class="banner__item">
+                        <img src="~/Assets/ImageProduct/@a.imageProduct_3" alt="" class="img-fluid" />
+                    </div>
+                    <div class="banner__item">
+                        <img src="~/Assets/ImageProduct/@a.imageProduct_4" alt="" class="img-fluid" />
+                    </div>
+                </div>
+                <hr />
+            </div>
+            <div class="title__product">
+                <h2>@a.nameProduct</h2>
+            </div>
+            <div class="price__save row">
+                <p>@String.Format(money, "{0:c0}", a.priceProduct)</p>
+            </div>
+            <hr />
+            <div class="description__product">
+                <p><b>Mô tả:</b> @Html.Raw(a.descriptionProduct)</p>
+                <div class="message">
+                    <hr />
+                </div>
+            </div>
+        </div>
+        <div class="col-4 detail__right p-0">
+            <div class="header__admim row" style="padding-left: 10px;">
+                <img src="~/Assets/_Apartment/dist/img/avatar.png" alt="" /><span><b>&nbsp;&nbsp;@a.Fullname</b></span>
+            </div>
+            <hr />
+            <div style="padding-left: 20px;">
+                <span><b>Tồn kho:</b> @a.amountProduct sản phẩm</span>
+            </div>
+            <hr />
+            <div class="button__admin">
+                <div style="background-color: #1f7ede; padding: 15px; width: 90%; border-radius: 10px; text-align: center;">
+                    <a href="@Url.Action("TrangCaNhan", "Seller", new { id = @a.idAccount })" style="font-weight: bold; color: #fff; text-decoration: none;"><i class="fas fa-info-circle"></i><span>Xem trang cá nhân</span></a>
+                </div>
+                <p></p>
+                @if (@a.amountProduct <= 0)
+                {
+                    <div style="background-color: #ed2d2d; padding: 15px; width: 90%; border-radius: 10px; font-weight: bold; color: #fff; text-align: center;">
+                        <i class="fas fa-cart-plus"></i><span>Sản phẩm hết hàng</span>
+                    </div>
+                }
+                else
+                {
+                    using (Html.BeginForm("ThemGiohang", "Buyer", new { Id = a.idProduct, @strURL = Request.Url.ToString() }))
+                    {
+                        @Html.TextBox("SoLuong", null, new { type = "hidden", min = 1, Value = 1 })
+                        <button class="number__admin">
+                            <i class="fas fa-cart-plus"></i><span>Thêm vào giỏ hàng</span>
+                        </button>
+
+                    }
+                }
+                <button class="chat__admin mt-3">
+                    <i class="fas fa-comment-dots"></i>Chat với người bán
+                </button>
+            </div>
+        </div>
+    </section>
+}

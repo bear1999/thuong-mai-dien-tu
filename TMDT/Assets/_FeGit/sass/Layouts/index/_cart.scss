@@ -1,0 +1,116 @@
+.html{
+    background-color: #f4f4f4;
+}
+.card__header {
+    background-color: #FFBA00;
+    .navbar {
+        img {
+            width: 100px;
+            height: 100px;
+        }
+        .navbar-collapse {
+            .nav-item {
+                a {
+                    border-left: 1px solid grey;
+                    padding-left: 20px;
+                    margin-left: 20px;
+                    color: #000;
+                    font-size: 23px;
+                }
+                .search__bar {
+                    margin-left: 540px;
+                }
+                
+            }
+        }
+    }
+}
+
+.card{
+    
+    .container-fluid{
+        .card__left{
+            .tableeee{
+                tr{
+                    background-color: #fff;
+                    margin-top: 20px;
+                    border-bottom: 1px solid #8383833d;
+                .img{
+                    
+                    img{
+                        width: 50px;
+                        height: 50px;
+                    }
+                }
+                .tensp{
+                    padding-top:25px;
+                    width: 500px;
+                }.dongia{
+                    padding-top:25px;
+                    display: block;
+                    width: 100px;
+                }
+                .sl{
+                    padding-top:20px;
+                    width: 100px;
+                    border: none;
+                    border-bottom: 1px solid #8383833d;
+                    &:focus{
+                        outline: none;
+                    }
+                }
+                .thanhtien{
+                    padding-top:25px;
+                }
+                .clear{
+                    i{
+                        padding-top:20px ;
+                        color: red  ;
+                    }
+                   
+                }
+                }
+                
+            }
+        }
+        .card__right{
+            .id__user{
+                font-weight: bold;
+                .icn__user{
+                    margin-right: 10px;
+                }
+            }
+            .search__form{
+                border-bottom: 1px solid #f4f4f4;
+                
+                .search__item{
+                    border: none;
+                    &:focus{
+                        outline: none;
+                    }
+                }
+                .add__customer{
+                    color:#000;
+                    margin-left: 120px;
+                }
+            }
+            .title__hoadon{
+                border: 1px solid #FFBA00;
+            }
+            .border-bottom{
+                #so-luong{
+                    float: right;
+                }
+                #tong-tien{
+                    float: right;
+                }
+            }
+            .thanh-toan{
+                background-color: #FFBA00;
+            }
+        }
+
+        
+    }
+    
+}
