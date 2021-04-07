@@ -569,5 +569,152 @@ namespace TMDT.Controllers
             }
             return View();
         }
+        //Vo hieu hoa tai khoan//
+        public ActionResult VoHieuHoa()
+        {
+            var getid = Url.RequestContext.RouteData.Values["id"];
+            int g = Int32.Parse(getid.ToString());
+            var a = from b in db.Logins
+                    join h in db.infoAccounts on b.idAccount equals h.idAccount
+                    where b.idAccount == g && b.hideAcc == false
+                    select new { b, h };
+            foreach (var d in a)
+            {
+                d.b.hideAcc = true;
+
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/Assets/SendMail/VoHieuHoa.html"));
+                content = content.Replace("{{fullname}}", d.h.Fullname);
+                new MailHelper().SendMail(d.b.Email, "[No Reply] Tình Trạng Tài Khoản", content);
+            }
+            db.SaveChanges();
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        //Danh sach tai khoan bi vo hieu hoa//
+        public ActionResult DanhSachTaiKhoanVoHieuHoa()
+        {
+            if (Session["idAccount"] == null) return RedirectToAction("DangNhap", "Login");
+            if (!Equals(Session["idRole"], 5)) return HttpNotFound();
+
+            IList<_FullAccountInfo> infoAcc = new List<_FullAccountInfo>();
+            var query = from acc in db.infoAccounts
+                        join lg in db.Logins on acc.idAccount equals lg.idAccount
+                        join tt in db.Roles on acc.idRole equals tt.idRole
+                        where lg.hideAcc == true
+                        select new { lg, acc, tt };
+
+            var infoAccs = query.ToList();
+            foreach (var info in infoAccs)
+            {
+                infoAcc.Add(new _FullAccountInfo()
+                {
+                    idAccount = info.lg.idAccount,
+                    Fullname = info.acc.Fullname,
+                    Email = info.lg.Email,
+                    Birthday = info.acc.Birthday,
+                    Address = info.acc.Address,
+                    PhoneNumber = info.acc.PhoneNumber,
+                    ChucVu = info.tt.nameRole
+                });
+            }
+            return View(infoAcc);
+        }
+
+        //Kich hoat tai khoan//
+        public ActionResult KichHoat()
+        {
+            var getid = Url.RequestContext.RouteData.Values["id"];
+            int g = Int32.Parse(getid.ToString());
+            var a = from b in db.Logins
+                    join h in db.infoAccounts on b.idAccount equals h.idAccount
+                    where b.idAccount == g && b.hideAcc == true
+                    select new { b, h };
+            foreach (var d in a)
+            {
+                d.b.hideAcc = false;
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/Assets/SendMail/KichHoat.html"));
+                content = content.Replace("{{fullname}}", d.h.Fullname);
+                new MailHelper().SendMail(d.b.Email, "[No Reply] Tình Trạng Tài Khoản", content);
+            }
+            db.SaveChanges();
+            return RedirectToAction("DanhSachTaiKhoanVoHieuHoa");
+        }
+
+        //An san pham tren trang chu//
+        public ActionResult AnSanPham(int getid)
+        {
+            int g = Int32.Parse(getid.ToString());
+            var a = from b in db.Products
+                    join h in db.Logins on b.idAccount equals h.idAccount
+                    where b.idProduct == g && b.confirmProduct == true
+                    select new { b, h };
+            foreach (var d in a)
+            {
+                d.b.confirmProduct = false;
+                d.b.hideProduct = true;
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/Assets/SendMail/AnSanPham.html"));
+                content = content.Replace("{{idproduct}}", d.b.idProduct.ToString());
+                new MailHelper().SendMail(d.h.Email, "[No Reply] Tình Trạng Sản Phẩm", content);
+            }
+            db.SaveChanges();
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        //Danh Sach san pham bi an di//
+        public ActionResult DanhSachAn()
+        {
+            if (Session["idAccount"] == null) return RedirectToAction("DangNhap", "Login");
+            if (!Equals(Session["idRole"], 5)) return HttpNotFound();
+
+            IList<_FullProduct> infoAcc = new List<_FullProduct>();
+            var query = from cus in db.infoAccounts
+                        join tt in db.Products on cus.idAccount equals tt.idAccount
+                        join hihi in db.Category_Product on tt.idCategory_Product equals hihi.idCategory_Product
+                        where tt.hideProduct == true && cus.idAccount == tt.idAccount && tt.confirmProduct == false
+                        orderby tt.datePost descending
+                        select new { cus, tt, hihi };
+
+            var infoAccs = query.ToList();
+            foreach (var info in infoAccs)
+            {
+                infoAcc.Add(new _FullProduct()
+                {
+                    idProduct = info.tt.idProduct,
+                    nameProduct = info.tt.nameProduct,
+                    priceProduct = info.tt.priceProduct,
+                    amountProduct = info.tt.amountProduct,
+                    descriptionProduct = info.tt.descriptionProduct,
+                    datePost = info.tt.datePost,
+                    nameCategory = info.hihi.nameCategory,
+                    Fullname = info.cus.Fullname,
+                    imageProduct_1 = info.tt.imageProduct_1,
+                    imageProduct_2 = info.tt.imageProduct_2,
+                    imageProduct_3 = info.tt.imageProduct_3,
+                    imageProduct_4 = info.tt.imageProduct_4
+                });
+            }
+            return View(infoAcc);
+        }
+
+        //Hien thi lai san pham//
+        public ActionResult HienThiSanPham()
+        {
+            var getid = Url.RequestContext.RouteData.Values["id"];
+            int g = Int32.Parse(getid.ToString());
+            var a = from b in db.Products
+                    join h in db.Logins on b.idAccount equals h.idAccount
+                    where b.idProduct == g && b.confirmProduct == false && b.hideProduct == true
+                    select new { b, h };
+            foreach (var d in a)
+            {
+                d.b.confirmProduct = true;
+                d.b.hideProduct = false;
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/Assets/SendMail/HienThiSanPham.html"));
+                content = content.Replace("{{idproduct}}", d.b.idProduct.ToString());
+                new MailHelper().SendMail(d.h.Email, "[No Reply] Tình Trạng Sản Phẩm", content);
+            }
+            db.SaveChanges();
+            return RedirectToAction("DanhSachAn");
+        }
     }
 }

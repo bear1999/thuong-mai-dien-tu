@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "Thêm danh mục";
+    Layout = "~/Views/Shared/_Dashboard_1.cshtml";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Assets/_Apartment/dist/css/hide-arrow-number.css">
+}
+@section scripts {
+    <!-- jquery ASP.NET -->
+    <script src="~/scripts/jquery.validate.min.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Assets/_Apartment/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            bsCustomFileInput.init();
+        });</script>
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Thêm danh mục</h1>
+                </div>
+                <!-- /.col -->
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body register-card-body">
+                    <p class="login-box-msg">
+                        <b>THÊM DANH MỤC SẢN PHẨM</b>
+                    </p>
+                    @using (Html.BeginForm("ThemDanhMuc", "Manager", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <p><span style="color:red">@ViewData["Err55"]</span></p>
+                        <p><span style="color:red">@ViewData["Err5"]</span></p>
+                        <p><span style="color:Highlight"><b>@ViewData["Reg11"]</b></span></p>
+                        @*<p><span style="color:Highlight"><b>@ViewData["Reg1"]</b></span></p>
+                            <p><span style="color:Highlight"><b>@ViewData["Reg2"]</b></span></p>
+                            <p><span style="color:Highlight"><b>@ViewData["Reg3"]</b></span></p>*@
+                        <div class="input-group mb-3">
+                            @Html.TextBox("id", null, new { @class = "form-control", type = "text", placeholder = "Mã danh mục" })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fad fa-id-card"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.TextBox("name", null, new { @class = "form-control", type = "text", placeholder = "Tên danh mục" })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-file-signature"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <label for="avartar">Ảnh danh mục</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="imageCategory" accept="image/*" name="imageCategory">
+                            <label class="custom-file-label text-muted" for="avartar">Ảnh danh mục</label>
+                        </div>
+                            <label>Icon</label>
+                            <div class="input-group mb-3">
+                                @Html.TextBox("icon", null, new { @class = "form-control", type = "text", placeholder = "Icon danh mục"})
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-cat"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="row">
+                            <!-- /.col -->
+                            <div class="col-md-auto">
+                                <button type="submit" class="btn btn-primary btn-block">Thêm</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <aside class="control-sidebar control-sidebar-dark"></aside>
+    </section>
+</div>
