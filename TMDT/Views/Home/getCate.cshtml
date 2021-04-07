@@ -1,0 +1,11 @@
+﻿@model IEnumerable<TMDT.Models.Category_Product>
+
+<div class="dropdown-item" style="background-color: #fff;">
+    @foreach (var item in Model)
+    {
+        <a href="@Url.Action("TimKiem", "Home", new { @idCate = item.idCategory_Product })" style="color: #000; text-decoration: none;">
+            @Html.Raw(item.iconCategory)<span style="font-size: 17px; padding-left: 5px;">@item.nameCategory</span>
+        </a>
+        <p></p>
+    }
+</div>
