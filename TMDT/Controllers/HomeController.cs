@@ -183,5 +183,170 @@ namespace TMDT.Controllers
             }
             return View(info.ToPagedList(pageNumber, pageSize));
         }
+	[HttpPost, ValidateAntiForgeryToken]
+        public ActionResult TimKiem(FormCollection collect, int? page)
+        {
+            int pageNumber = (page ?? 1);
+            int pageSize = 10;
+            var noidung = collect["NoiDung"];
+            int idCate = 0;
+            if (Session["idCate"] != null)
+                idCate = Int32.Parse(Session["idCate"].ToString());
+
+            var getNameCate = from e in db.Category_Product
+                              where e.idCategory_Product == idCate
+                              select e.nameCategory;
+            foreach (var g in getNameCate)
+                Session["nameCate"] = g;
+
+            noidung = _Function.convertKhongDau(noidung);
+            noidung = Regex.Replace(noidung, @"\s+", "-");
+            List<_FullProduct> info = new List<_FullProduct>();
+            if (idCate == 0)
+            {
+                var a = from b in db.Products
+                        join c in db.infoAccounts on b.idAccount equals c.idAccount
+                        join e in db.Category_Product on b.idCategory_Product equals e.idCategory_Product
+                        where b.Alias.Contains(noidung) && b.hideProduct == false && b.confirmProduct == true
+                        orderby b.datePost descending
+                        select new { b, c, e };
+                foreach (var d in a)
+                {
+                    info.Add(new _FullProduct()
+                    {
+                        idProduct = d.b.idProduct,
+                        priceProduct = d.b.priceProduct,
+                        amountProduct = d.b.amountProduct,
+                        datePost = d.b.datePost,
+                        idCategory_Product = d.b.idCategory_Product,
+                        imageProduct_1 = d.b.imageProduct_1,
+                        nameCategory = d.e.nameCategory,
+                        nameProduct = d.b.nameProduct,
+                        descriptionProduct = d.b.descriptionProduct,
+                        Alias = d.b.Alias,
+                        Fullname = d.c.Fullname,
+                    });
+                }
+            }
+            else
+            {
+                var a = from b in db.Products
+                        join c in db.infoAccounts on b.idAccount equals c.idAccount
+                        join e in db.Category_Product on b.idCategory_Product equals e.idCategory_Product
+                        where b.Alias.Contains(noidung) && b.hideProduct == false && b.confirmProduct == true && b.idCategory_Product == idCate
+                        orderby b.datePost descending
+                        select new { b, c, e };
+                foreach (var d in a)
+                {
+                    info.Add(new _FullProduct()
+                    {
+                        idProduct = d.b.idProduct,
+                        priceProduct = d.b.priceProduct,
+                        amountProduct = d.b.amountProduct,
+                        datePost = d.b.datePost,
+                        idCategory_Product = d.b.idCategory_Product,
+                        imageProduct_1 = d.b.imageProduct_1,
+                        nameCategory = d.e.nameCategory,
+                        nameProduct = d.b.nameProduct,
+                        descriptionProduct = d.b.descriptionProduct,
+                        Alias = d.b.Alias,
+                        Fullname = d.c.Fullname,
+                    });
+                }
+            }
+            return View(info.ToPagedList(pageNumber, pageSize));
+        }
+        public ActionResult TrangChu()
+        {
+            if (Session["idCate"] == null)
+                Session["idCate"] = 0; //tìm kiếm all
+            Session.Remove("nameCate"); //Xóa để tìm kiếm all
+            _TrangChu mymodel = new _TrangChu();
+            mymodel._Category_Product = LoadCategory_Product();
+            mymodel._FullProduct = LoadBaiDang();
+            return View(mymodel);
+        }
+        public List<Category_Product> LoadCategory_Product()
+        {
+            var query = from a in db.Category_Product
+                        select a;
+            var infoProducts = query.ToList();
+            return infoProducts;
+        }
+        public List<_FullProduct> LoadBaiDang()
+        {
+            List<_FullProduct> LoadBaiDang = new List<_FullProduct>();
+            var query = from product in db.Products
+                        join catePro in db.Category_Product on product.idCategory_Product equals catePro.idCategory_Product
+                        where product.hideProduct == false && product.confirmProduct == true
+                        orderby product.datePost descending
+                        select new { product, catePro };
+            var infoProducts = query.ToList().Take(10);
+
+            foreach (var info in infoProducts)
+            {
+                LoadBaiDang.Add(new _FullProduct()
+                {
+                    idProduct = info.product.idProduct,
+                    priceProduct = info.product.priceProduct,
+                    amountProduct = info.product.amountProduct,
+                    datePost = info.product.datePost,
+                    idCategory_Product = info.product.idCategory_Product,
+                    imageProduct_1 = info.product.imageProduct_1,
+                    nameCategory = info.catePro.nameCategory,
+                    nameProduct = info.product.nameProduct,
+                    descriptionProduct = info.product.descriptionProduct,
+                    Alias = info.product.Alias,
+                });
+            }
+            return LoadBaiDang;
+        }
+        // GET: Home
+        public ActionResult ChiTietSP(string alias, int id)
+        {
+            var _id = Int32.Parse(id.ToString());
+            IList<_FullProduct> infoProduct = new List<_FullProduct>();
+            var query = from product in db.Products
+                        join catePro in db.Category_Product on product.idCategory_Product equals catePro.idCategory_Product
+                        join Acc in db.infoAccounts on product.idAccount equals Acc.idAccount
+                        where product.idProduct == _id && product.Alias.Equals(alias)
+                        orderby product.datePost descending
+                        select new { product, catePro, Acc };
+            var infoProducts = query.ToList();
+
+            foreach (var info in infoProducts)
+            {
+                infoProduct.Add(new _FullProduct()
+                {
+                    idProduct = info.product.idProduct,
+                    priceProduct = info.product.priceProduct,
+                    amountProduct = info.product.amountProduct,
+                    descriptionProduct = info.product.descriptionProduct,
+                    datePost = info.product.datePost,
+                    idCategory_Product = info.product.idCategory_Product,
+                    hideProduct = info.product.hideProduct,
+                    imageProduct_1 = info.product.imageProduct_1,
+                    imageProduct_2 = info.product.imageProduct_2,
+                    imageProduct_3 = info.product.imageProduct_3,
+                    imageProduct_4 = info.product.imageProduct_4,
+                    nameCategory = info.catePro.nameCategory,
+                    nameProduct = info.product.nameProduct,
+                    Fullname = info.Acc.Fullname,
+                    idAccount = info.Acc.idAccount,
+                });
+            }
+            return View(infoProduct);
+        }
+        public ActionResult loadInfo()
+        {
+            if (Session["idAccount"] == null) return RedirectToAction("DangNhap", "Login");
+
+            var idAcc = Int32.Parse(Session["idAccount"].ToString());
+
+            var b = (from a in db.infoAccounts
+                     where a.idAccount == idAcc
+                     select a).ToList();
+            return PartialView(b);
+        }
     }
 }

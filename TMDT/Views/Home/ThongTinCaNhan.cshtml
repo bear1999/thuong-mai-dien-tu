@@ -1,0 +1,126 @@
+﻿@model IEnumerable<TMDT.Models._FullAccountInfo>
+
+@{
+    ViewBag.Title = "Thông tin cá nhân";
+    Layout = "~/Views/Shared/_Dashboard_1.cshtml";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/dist/css/hide-arrow-number.css">
+    <link rel="stylesheet" href="~/Assets/plugins/ekko-lightbox/ekko-lightbox.css">
+}
+@section scripts{
+    <script src="~/Assets/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+    <script>
+        $(function () {
+            $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+                event.preventDefault();
+                $(this).ekkoLightbox({
+                    alwaysShowClose: true
+                });
+            });
+            $('.btn[data-filter]').on('click', function () {
+                $('.btn[data-filter]').removeClass('active');
+                $(this).addClass('active');
+            });
+        })
+    </script>
+    <script src="~/Assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            bsCustomFileInput.init();
+        });</script>
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Thông tin cá nhân</h1>
+                </div>
+                <!-- /.col -->
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body register-card-body">
+                    <p class="login-box-msg">
+                        <b>THÔNG TIN CÁ NHÂN</b>
+                    </p>
+                    @using (Html.BeginForm("ThongTinCaNhan", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                    {
+                        foreach (var tt in Model)
+                        {
+                            <label>Họ tên</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" value="@Html.DisplayFor(a => tt.Fullname)" disabled>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <label>Ngày sinh</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" value="@Convert.ToDateTime(tt.Birthday).ToString("dd/MM/yyyy")" disabled>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-birthday-cake"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <label>Số điện thoại</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" value="@Html.DisplayFor(a => tt.PhoneNumber)" disabled>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fas fa-phone"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <label>Địa chỉ</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" value="@tt.Address" disabled>
+                            </div>
+                            <label>Địa chỉ Email</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" value="@tt.Email" disabled>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-envelope"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <label>Chức vụ</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" value="@tt.ChucVu" disabled>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-briefcase"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        if ((Equals(Session["idRole"], 1)) || (Equals(Session["idRole"], 2)))
+                        {
+                            <div class="col-md-12">
+                                <div>
+                                    <a href="@Url.Action("CapNhatThongTin", "Home")">Chỉnh sửa</a>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- /.card -->
+    </section>
+</div>
