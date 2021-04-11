@@ -1,0 +1,10 @@
+Kiểm thử hộp đen:
+	Kiểm thử vùng : Hoàn tất
+	Kiểm thử Biên : Hoàn tất
+	Kiểm thử bảng quyết định : Hoàn tất
+	Kiểm thử dịch chuyển : Hoàn tất
+Kiểm Thử hộp trắng:
+	Kiểm thử đường : Hoàn tât
+	Kiểm thử Nhánh : Hoàn tất
+	Kiểm thử Điều kiện: Hoàn tất
+Kết luận: Hoàn thiện
